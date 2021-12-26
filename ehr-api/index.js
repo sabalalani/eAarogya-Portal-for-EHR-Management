@@ -11,7 +11,7 @@ const passportLocalMongoose = require("passport-local-mongoose");
 const i18n = require("i18n");
 const upload = require('express-fileupload');
 const cors = require('cors');
-const uri = process.env("MONGO_URL");
+const uri = process.env.MONGO_URL;
 
 i18n.configure({
   locales: ["en", "hi", "ka"],
