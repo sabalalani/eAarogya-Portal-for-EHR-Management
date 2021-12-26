@@ -11,13 +11,8 @@ const passportLocalMongoose = require("passport-local-mongoose");
 const i18n = require("i18n");
 const upload = require('express-fileupload');
 const cors = require('cors');
-const uri =
-  "mongodb+srv://test:test@cluster0-2czvc.mongodb.net/ehr?retryWrites=true&w=majority";
+const uri = process.env("MONGO_URL");
 
-mongoose.connect(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
 i18n.configure({
   locales: ["en", "hi", "ka"],
   directory: __dirname + "/locales",
@@ -151,6 +146,10 @@ app.post("/register", (req, res) => {
   );
 });
 
-app.listen(3000, function () {
+app.listen(3000, async () => {
+  await mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
   console.log("Server running on port 3000");
 });
